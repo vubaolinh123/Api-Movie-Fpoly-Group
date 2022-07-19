@@ -3,7 +3,7 @@ import cors from 'cors';
 import morgan from "morgan"
 import mongoose from "mongoose"
 import { MongoClient } from "mongodb";
-
+import productRouter from "./routes/product"
 
 const app = express();
 
@@ -11,6 +11,11 @@ const app = express();
 app.use(cors());
 app.use(morgan("tiny"))
 app.use(express.json());
+
+
+// Router
+app.use("/api", productRouter);
+
 
 const url = "mongodb+srv://nodejsgroup8:nodejsgroup8@cluster0.btydm.mongodb.net/NodeJS?retryWrites=true&w=majority"
 const mongo = new MongoClient(url, { useNewUrlParser: true });
