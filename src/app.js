@@ -19,7 +19,6 @@ mongoose.connect("mongodb://localhost:27017/we16310")
     })
     .catch(err => console.log(err))
 
-const PORT = 3001;
-app.listen(PORT, () => {
-    console.log("Server của bạn đang chạy ở cổng ", PORT);
+app.listen(process.env.PORT || 3001, () => {
+    console.log("Server của bạn đang chạy");
 })
