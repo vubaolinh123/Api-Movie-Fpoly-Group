@@ -4,6 +4,7 @@ import morgan from "morgan"
 import mongoose from "mongoose"
 import { MongoClient } from "mongodb";
 import productRouter from "./routes/product"
+import userRouter from "./routes/auth"
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(express.json());
 
 // Router
 app.use("/api", productRouter);
+app.use("/api", userRouter);
 
 
 const mongoAtlasUri = "mongodb+srv://nodejsgroup8:nodejsgroup8@cluster0.btydm.mongodb.net/NodeJS?retryWrites=true&w=majority";
@@ -24,7 +26,7 @@ try {
     mongoose.connect(
         mongoAtlasUri,
         { useNewUrlParser: true, useUnifiedTopology: true },
-        () => console.log(" Mongoose đã được kết nối")
+        () => console.log("Mongoose đã được kết nối")
     );
 } catch (e) {
     console.log("Không thể kết nối");
