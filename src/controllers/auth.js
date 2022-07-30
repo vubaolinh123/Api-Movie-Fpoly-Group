@@ -38,6 +38,50 @@ export const signin = async (req, res) => {
     }
 }
 
+export const signinwithnextauth = async (req, res) => {
+    const {email, name, image} = req.body;
+    try {
+        const user = await User.findOne({email}).exec();
+        if (user) {
+            const token = jwt.sign({_id: user._id},"123456",{expiresIn: '1h'})
+            return res.json({
+                token,
+                user:{
+                    _id: user._id,
+                    email: user.email,
+                    name: user.name,
+                    birthday: user.birthday,
+                    age: user.age,
+                    role: user.role,
+                    status: user.status
+                }
+            })            
+        } else {
+            const newuser = await new User({email, name, image}).save();
+            const token = jwt.sign({_id: newuser._id},"123456",{expiresIn: '1h'})
+            return res.json({
+                token,
+                user:{
+                    _id: newuser._id,
+                    email: newuser.email,
+                    name: newuser.name,
+                    age: newuser.age,
+                    role: newuser.role,
+                    status: newuser.status
+                }
+                
+            })
+        }       
+        
+    } catch (error) {
+        console.log(error);
+        res.status(400).json(
+            { error: "Đăng ký thất bại" }
+        )                
+    }
+
+}
+
 export const signup = async (req, res) => {
     const {email, password, name, birthday, age, role, status} = req.body;
     try {
