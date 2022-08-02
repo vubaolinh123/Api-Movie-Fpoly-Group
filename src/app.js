@@ -6,6 +6,9 @@ import { MongoClient } from "mongodb";
 import productRouter from "./routes/product"
 import userRouter from "./routes/auth"
 
+
+
+
 const app = express();
 
 // middleware
@@ -14,9 +17,12 @@ app.use(morgan("tiny"))
 app.use(express.json());
 
 
+
 // Router
 app.use("/api", productRouter);
 app.use("/api", userRouter);
+
+
 
 
 const mongoAtlasUri = "mongodb+srv://nodejsgroup8:nodejsgroup8@cluster0.btydm.mongodb.net/NodeJS?retryWrites=true&w=majority";

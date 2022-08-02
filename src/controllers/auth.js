@@ -131,3 +131,33 @@ export const changpassword = async (req, res) => {
         )                
     }
 }
+
+//--------------------AUTH---------------------
+
+export const listUser = async (req,res)=>{
+    try {
+        const user = await User.find().exec()
+        res.json(user)
+    } catch (error) {
+        res.status(400).json({message:"Không tìm thấy Data"})
+    }
+}
+
+export const detailUser = async (req,res)=>{
+    try {
+        const user = await User.findOne({_id: req.params.id }).exec()
+       
+        res.json(user)
+    } catch (error) {
+        res.status(400).json({message:"Không tìm thấy Data"})
+    }
+}
+
+export const editUser = async (req,res)=>{
+    try {
+        const user = await User.findOneAndUpdate({_id: req.params.id }, req.body ,{new:true}).exec()
+        res.json(user)
+    } catch (error) {
+        res.status(400).json({message:"Sửa thất bại"})
+    }
+}
