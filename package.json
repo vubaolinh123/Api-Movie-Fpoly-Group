@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon ./src/app.js --exec babel-node -e js -e .yaml",
+    "start": "nodemon ./src/app.js --exec babel-node -e js -e .js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
