@@ -3,8 +3,8 @@ import cors from 'cors';
 import morgan from "morgan"
 import mongoose from "mongoose"
 import { MongoClient } from "mongodb";
-import productRouter from "./routes/product"
 import userRouter from "./routes/auth"
+import commentRouter from "./routes/comment"
 
 
 
@@ -19,8 +19,8 @@ app.use(express.json());
 
 
 // Router
-app.use("/api", productRouter);
 app.use("/api", userRouter);
+app.use("/api", commentRouter);
 
 
 
