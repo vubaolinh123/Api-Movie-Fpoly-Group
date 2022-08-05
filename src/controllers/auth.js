@@ -172,7 +172,7 @@ export const editUser = async (req,res)=>{
     }
 }
 
-export const getFavoriteList = async (req,res) => {    
+export const getFavorite = async (req,res) => {    
     try {
         const user = await User.findOne({_id: req.params.id }).exec();
         const favoritelist = await FavoriteList.find({user}).select('-userId').exec();

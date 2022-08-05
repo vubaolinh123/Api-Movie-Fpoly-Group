@@ -13,7 +13,6 @@ export const create = async (req, res) => {
     }
 }
 
-
 export const list = async (req, res) => {
     try {
         const product = await Products.find().exec()
