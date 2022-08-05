@@ -15,6 +15,6 @@ router.post("/auth/changeprofile", updateUser)
 router.get("/users", listUser )
 router.get("/users/:id", detailUser )
 router.put("/users/:id", editUser )
-router.post("/users/favoritelist", getFavoriteList )
+router.get("/users/favoritelist/:id", getFavoriteList )
 
 export default router
