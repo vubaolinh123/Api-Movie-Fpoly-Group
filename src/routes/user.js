@@ -7,7 +7,6 @@ const router = Router()
 router.get("/users", listUser )
 router.get("/users/:id", detailUser )
 router.put("/users/:id", editUser )
-router.put("/users", getFavoriteList )
 
 export default router
 
