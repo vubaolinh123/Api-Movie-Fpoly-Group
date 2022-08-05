@@ -176,9 +176,7 @@ export const getFavoriteList = async (req,res) => {
     try {
         const user = await User.findOne({_id: req.params.id }).exec();
         const favoritelist = await FavoriteList.find({user}).select('-userId').exec();
-        res.json({
-            favoritelist
-        })
+        res.json(favoritelist)
     } catch (error) {
         console.log(error)
     }
