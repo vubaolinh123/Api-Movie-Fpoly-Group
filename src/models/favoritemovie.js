@@ -6,13 +6,13 @@ const favoritelistSchema = new Schema({
         type: String,
         required: true,
     },
-    user: {
+    userId: {
         type: ObjectId,
-        ref: "Category"
+        ref: "User"
     }
 }, { timestamps: true });
 
 
-const Users = mongoose.model('User', favoritelistSchema);
+const Users = mongoose.model('FavoriteList', favoritelistSchema);
 
 export default Users;
