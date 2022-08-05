@@ -1,8 +1,10 @@
 import { Router } from "express";
-import {add, remove} from '../controllers/favorite'
+import {addMovie, addTv, removeMovie, removeTv} from '../controllers/favorite'
 const route = Router()
 
-route.post('/favorite', add)
-route.delete('/favorite/:id', remove)
+route.post('/favoritemovie', addMovie)
+route.delete('/favoritemovie/:id', removeMovie)
+route.post('/favoritetv', addTv)
+route.delete('/favoritetv/:id', removeTv)
 
 export default route;
