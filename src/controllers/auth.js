@@ -1,5 +1,5 @@
 import User from '../models/user'
-import FavoriteList from "../models/favoritemovie"
+import FavoriteList from "../models/favorite"
 import jwt from "jsonwebtoken"
 
 export const signin = async (req, res) => {
