@@ -5,7 +5,7 @@ import mongoose from "mongoose"
 import { MongoClient } from "mongodb";
 import productRouter from "./routes/product"
 import userRouter from "./routes/auth"
-import favoritelistRouter from "./routes/favoritelist"
+import favoritelistRouter from "./routes/favoritemovie"
 
 
 

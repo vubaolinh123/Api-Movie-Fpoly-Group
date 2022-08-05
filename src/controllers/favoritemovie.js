@@ -1,4 +1,4 @@
-import FavoriteList from "../models/favoritelist"
+import FavoriteList from "../models/favoritemovie"
 
 export const add = async(req, res) => {
     try {

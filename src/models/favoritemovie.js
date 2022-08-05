@@ -6,7 +6,7 @@ const favoritelistSchema = new Schema({
         type: String,
         required: true,
     },
-    user: {
+    userId: {
         type: ObjectId,
         ref: "User"
     }

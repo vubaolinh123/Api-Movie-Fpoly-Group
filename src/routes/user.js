@@ -1,5 +1,4 @@
 import { Router } from "express";
-import { getFavoriteList } from "../controllers/auth";
 import { detailUser, editUser, listUser } from "../controllers/user";
 
 const router = Router()
