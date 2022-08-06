@@ -6,6 +6,7 @@ import { MongoClient } from "mongodb";
 import productRouter from "./routes/product"
 import userRouter from "./routes/auth"
 import favoritelistRouter from "./routes/favoritemovie"
+import commentRouter from "./routes/comment";
 
 
 
@@ -23,7 +24,7 @@ app.use(express.json());
 app.use("/api", productRouter);
 app.use("/api", userRouter);
 app.use("/api", favoritelistRouter);
-
+app.use("/api", commentRouter)
 
 
 
