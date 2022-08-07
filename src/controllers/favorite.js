@@ -30,3 +30,12 @@ export const getFavorite = async (req,res) => {
         console.log(error)
     }
 }
+export const getFavoriteByMediaType = async (req,res) => {    
+    try {
+        const user = await User.findOne({_id: req.params.userId }).exec();
+        const favoritelistbymediatype = await Favorite.find({user, media_type: +req.query.type}).select('-userId').exec();
+        res.json(favoritelistbymediatype)
+    } catch (error) {
+        console.log(error)
+    }
+}
