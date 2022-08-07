@@ -1,43 +1,32 @@
+import User from '../models/user'
 import Favorite from "../models/favorite"
 
-export const addMovie = async(req, res) => {
+export const addMedia = async(req, res) => {
     try {
         const favorite = await new Favorite(req.body).save();
         res.json(favorite)
     } catch (error) {
         res.status(400).json({
-            error: "Không thêm được"
+            error: "Có lỗi xảy ra"
         })
     }
 }
-export const removeMovie = async (req, res) => {
+export const removeMedia = async (req, res) => {
     try {
         const favorite = await Favorite.findOneAndDelete({_id: req.params.id});
         res.json(favorite)
     } catch (error) {
         res.status(400).json({
-            error: "Xóa thất bại"
+            error: "Có lỗi xảy ra"
         })
     }
 };
-
-export const addTv = async(req, res) => {
+export const getFavorite = async (req,res) => {    
     try {
-        const favorite = await new Favorite(req.body).save();
-        res.json(favorite)
+        const user = await User.findOne({_id: req.params.userId }).exec();
+        const favoritelist = await Favorite.find({user}).select('-userId').exec();
+        res.json(favoritelist)
     } catch (error) {
-        res.status(400).json({
-            error: "Không thêm được"
-        })
+        console.log(error)
     }
 }
-export const removeTv = async (req, res) => {
-    try {
-        const favorite = await Favorite.findOneAndDelete({_id: req.params.id});
-        res.json(favorite)
-    } catch (error) {
-        res.status(400).json({
-            error: "Xóa thất bại"
-        })
-    }
-};

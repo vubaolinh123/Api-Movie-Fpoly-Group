@@ -1,5 +1,4 @@
 import User from '../models/user'
-import FavoriteList from "../models/favorite"
 import jwt from "jsonwebtoken"
 
 export const signin = async (req, res) => {
@@ -172,12 +171,3 @@ export const editUser = async (req,res)=>{
     }
 }
 
-export const getFavorite = async (req,res) => {    
-    try {
-        const user = await User.findOne({_id: req.params.id }).exec();
-        const favoritelist = await FavoriteList.find({user}).select('-userId').exec();
-        res.json(favoritelist)
-    } catch (error) {
-        console.log(error)
-    }
-}
