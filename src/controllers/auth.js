@@ -1,4 +1,5 @@
 import User from '../models/user'
+import FavoriteList from "../models/favoritemovie"
 import jwt from "jsonwebtoken"
 
 export const signin = async (req, res) => {
@@ -129,5 +130,56 @@ export const changpassword = async (req, res) => {
         res.status(400).json(
             { error: "Đổi mật khẩu thất bại" }
         )                
+    }
+}
+
+export const updateUser = async (req,res)=>{
+    try {
+        const user = await User.findOneAndUpdate({_id: req.body._id }, req.body ,{new:true}).exec()
+        res.json(user)
+    } catch (error) {
+        res.status(400).json({message:"Sửa thất bại"})
+    }
+}
+
+//--------------------AUTH---------------------
+
+export const listUser = async (req,res)=>{
+    try {
+        const user = await User.find().exec()
+        res.json(user)
+    } catch (error) {
+        res.status(400).json({message:"Không tìm thấy Data"})
+    }
+}
+
+export const detailUser = async (req,res)=>{
+    try {
+        const user = await User.findOne({_id: req.params.id }).exec()
+       
+        res.json(user)
+    } catch (error) {
+        res.status(400).json({message:"Không tìm thấy Data"})
+    }
+}
+
+export const editUser = async (req,res)=>{
+    try {
+        const user = await User.findOneAndUpdate({_id: req.params.id }, req.body ,{new:true}).exec()
+        res.json(user)
+    } catch (error) {
+        res.status(400).json({message:"Sửa thất bại"})
+    }
+}
+
+export const getFavoriteList = async (req,res) => {    
+    try {
+        const user = await User.findOne({_id: req.body._id }).exec();
+        const favoritelist = await FavoriteList.find({user}).select('-userId').exec();
+        res.json({
+            favoritelist
+        })
+    } catch (error) {
+        console.log(error)
     }
 }

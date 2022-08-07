@@ -5,6 +5,11 @@ import mongoose from "mongoose"
 import { MongoClient } from "mongodb";
 import productRouter from "./routes/product"
 import userRouter from "./routes/auth"
+import favoritelistRouter from "./routes/favoritemovie"
+import commentRouter from "./routes/comment";
+
+
+
 
 const app = express();
 
@@ -14,9 +19,13 @@ app.use(morgan("tiny"))
 app.use(express.json());
 
 
+
 // Router
 app.use("/api", productRouter);
 app.use("/api", userRouter);
+app.use("/api", favoritelistRouter);
+app.use("/api", commentRouter)
+
 
 
 const mongoAtlasUri = "mongodb+srv://nodejsgroup8:nodejsgroup8@cluster0.btydm.mongodb.net/NodeJS?retryWrites=true&w=majority";
