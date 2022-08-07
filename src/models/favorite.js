@@ -3,8 +3,10 @@ import mongoose, { Schema } from "mongoose";
 
 const favoritelistSchema = new Schema({
     movieId: {
-        type: String,
-        required: true,
+        type: String
+    },
+    tvId: {
+        type: String
     },
     userId: {
         type: ObjectId,
