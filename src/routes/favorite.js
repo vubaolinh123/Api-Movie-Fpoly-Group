@@ -5,6 +5,6 @@ const route = Router()
 route.post('/favorite', addMedia)
 route.get('/favorite/movie/:userId', getFavoriteMovie)
 route.get('/favorite/tv/:userId', getFavoriteTv)
-route.delete('/favorite/:userId', removeMedia)
+route.delete('/favorite/:userId/:mediaId', removeMedia)
 
 export default route;

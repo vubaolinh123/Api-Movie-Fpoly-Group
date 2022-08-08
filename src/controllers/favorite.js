@@ -4,7 +4,7 @@ import Favorite from "../models/favorite"
 export const addMedia = async(req, res) => {
     try {
         const user = await User.findOne({_id: req.params.userId }).exec();
-        const favoritelist = await Favorite.find({user, mediaId: req.body.mediaId}).select('-userId').exec();
+        const favoritelist = await Favorite.find({userId: user._id, mediaId: req.body.mediaId}).select('-userId').exec();
         if ((favoritelist.length !== 0)) {
             return res.status(400).json({
                 error: "Phim đã có trong danh sách yêu thích"
@@ -21,7 +21,13 @@ export const addMedia = async(req, res) => {
 export const removeMedia = async (req, res) => {
     try {
         const user = await User.findOne({_id: req.params.userId }).exec();
-        const favorite = await Favorite.findOneAndDelete({user, mediaId: req.body.mediaId});
+        console.log(user._id)
+        const favorite = await Favorite.findOneAndDelete({userId: user._id, mediaId: req.params.mediaId}).exec();
+        if (!favorite) {
+            res.status(400).json({
+                error: "Có lỗi xảy ra"
+            })            
+        }
         res.json(favorite)
     } catch (error) {
         res.status(400).json({
@@ -32,7 +38,7 @@ export const removeMedia = async (req, res) => {
 export const getFavoriteMovie = async (req,res) => {    
     try {
         const user = await User.findOne({_id: req.params.userId }).exec();
-        const favoritemovielist = await Favorite.find({user, media_type: 0}).select('-userId').exec();
+        const favoritemovielist = await Favorite.find({userId: user._id, media_type: 0}).select('-userId').exec();
         res.json(favoritemovielist)
     } catch (error) {
         console.log(error)
@@ -41,7 +47,7 @@ export const getFavoriteMovie = async (req,res) => {
 export const getFavoriteTv = async (req,res) => {    
     try {
         const user = await User.findOne({_id: req.params.userId }).exec();
-        const favoritetvlist = await Favorite.find({user, media_type: 1}).select('-userId').exec();
+        const favoritetvlist = await Favorite.find({userId: user._id, media_type: 1}).select('-userId').exec();
         res.json(favoritetvlist)
     } catch (error) {
         console.log(error)
