@@ -3,7 +3,7 @@ import mongoose, { Schema } from "mongoose";
 
 const commentSchema = new Schema({
     movie_id: {
-        type: String,
+        type: Number,
         required: true
     },
     userId: {
