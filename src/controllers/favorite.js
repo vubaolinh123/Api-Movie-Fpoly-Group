@@ -20,7 +20,8 @@ export const addMedia = async(req, res) => {
 }
 export const removeMedia = async (req, res) => {
     try {
-        const favorite = await Favorite.findOneAndDelete({_id: req.params.id});
+        const user = await User.findOne({_id: req.params.userId }).exec();
+        const favorite = await Favorite.findOneAndDelete({user, mediaId: req.body.mediaId});
         res.json(favorite)
     } catch (error) {
         res.status(400).json({
