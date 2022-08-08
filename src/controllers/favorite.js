@@ -21,7 +21,6 @@ export const addMedia = async(req, res) => {
 export const removeMedia = async (req, res) => {
     try {
         const user = await User.findOne({_id: req.params.userId }).exec();
-        console.log(user._id)
         const favorite = await Favorite.findOneAndDelete({userId: user._id, mediaId: req.params.mediaId}).exec();
         if (!favorite) {
             res.status(400).json({
