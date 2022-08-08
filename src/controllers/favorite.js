@@ -3,6 +3,13 @@ import Favorite from "../models/favorite"
 
 export const addMedia = async(req, res) => {
     try {
+        const user = await User.findOne({_id: req.params.userId }).exec();
+        const favoritelist = await Favorite.find({user, mediaId: req.body.mediaId}).select('-userId').exec();
+        if ((favoritelist.length !== 0)) {
+            return res.status(400).json({
+                error: "Phim đã có trong danh sách yêu thích"
+            })
+        }
         const favorite = await new Favorite(req.body).save();
         res.json(favorite)
     } catch (error) {
