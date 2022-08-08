@@ -52,7 +52,7 @@ export const editComment = async (req, res) => {
 
 export const deleteComment = async (req, res) => {
     try {
-        const comment = await  Comment.findByIdAndRemove({_id: req.body._id}).exec()
+        const comment = await Comment.findOneAndDelete({_id: req.params.id}).exec()
         res.json(comment)
     } catch (error) {
         console.log(error);
