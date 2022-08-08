@@ -31,8 +31,8 @@ export const removeMedia = async (req, res) => {
 export const getFavoriteMovie = async (req,res) => {    
     try {
         const user = await User.findOne({_id: req.params.userId }).exec();
-        const favoritelist = await Favorite.find({user, media_type: 0}).select('-userId').exec();
-        res.json(favoritelist)
+        const favoritemovielist = await Favorite.find({user, media_type: 0}).select('-userId').exec();
+        res.json(favoritemovielist)
     } catch (error) {
         console.log(error)
     }
@@ -40,8 +40,8 @@ export const getFavoriteMovie = async (req,res) => {
 export const getFavoriteTv = async (req,res) => {    
     try {
         const user = await User.findOne({_id: req.params.userId }).exec();
-        const favoritelist = await Favorite.find({user, media_type: 1}).select('-userId').exec();
-        res.json(favoritelist)
+        const favoritetvlist = await Favorite.find({user, media_type: 1}).select('-userId').exec();
+        res.json(favoritetvlist)
     } catch (error) {
         console.log(error)
     }
