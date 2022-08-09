@@ -1,43 +1,54 @@
+import User from '../models/user'
 import Favorite from "../models/favorite"
 
-export const addMovie = async(req, res) => {
+export const addMedia = async(req, res) => {
     try {
+        const user = await User.findOne({_id: req.body.userId }).exec();
+        const favoritelist = await Favorite.find({userId: user._id, mediaId: req.body.mediaId}).select('-userId').exec();
+        if ((favoritelist.length !== 0)) {
+            return res.status(400).json({
+                error: "Phim đã có trong danh sách yêu thích"
+            })
+        }
         const favorite = await new Favorite(req.body).save();
         res.json(favorite)
     } catch (error) {
         res.status(400).json({
-            error: "Không thêm được"
+            error: "Có lỗi xảy ra"
         })
     }
 }
-export const removeMovie = async (req, res) => {
+export const removeMedia = async (req, res) => {
     try {
-        const favorite = await Favorite.findOneAndDelete({_id: req.params.id});
+        const user = await User.findOne({_id: req.params.userId }).exec();
+        const favorite = await Favorite.findOneAndDelete({userId: user._id, mediaId: req.params.mediaId}).exec();
+        if (!favorite) {
+            res.status(400).json({
+                error: "Có lỗi xảy ra"
+            })            
+        }
         res.json(favorite)
     } catch (error) {
         res.status(400).json({
-            error: "Xóa thất bại"
+            error: "Có lỗi xảy ra"
         })
     }
 };
-
-export const addTv = async(req, res) => {
+export const getFavoriteMovie = async (req,res) => {    
     try {
-        const favorite = await new Favorite(req.body).save();
-        res.json(favorite)
+        const user = await User.findOne({_id: req.params.userId }).exec();
+        const favoritemovielist = await Favorite.find({userId: user._id, media_type: 0}).select('-userId').exec();
+        res.json(favoritemovielist)
     } catch (error) {
-        res.status(400).json({
-            error: "Không thêm được"
-        })
+        console.log(error)
     }
 }
-export const removeTv = async (req, res) => {
+export const getFavoriteTv = async (req,res) => {    
     try {
-        const favorite = await Favorite.findOneAndDelete({_id: req.params.id});
-        res.json(favorite)
+        const user = await User.findOne({_id: req.params.userId }).exec();
+        const favoritetvlist = await Favorite.find({userId: user._id, media_type: 1}).select('-userId').exec();
+        res.json(favoritetvlist)
     } catch (error) {
-        res.status(400).json({
-            error: "Xóa thất bại"
-        })
+        console.log(error)
     }
-};
+}

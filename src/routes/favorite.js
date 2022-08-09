@@ -1,10 +1,10 @@
 import { Router } from "express";
-import {addMovie, addTv, removeMovie, removeTv} from '../controllers/favorite'
+import {addMedia, getFavoriteMovie, getFavoriteTv, removeMedia} from '../controllers/favorite'
 const route = Router()
 
-route.post('/favoritemovie', addMovie)
-route.delete('/favoritemovie/:id', removeMovie)
-route.post('/favoritetv', addTv)
-route.delete('/favoritetv/:id', removeTv)
+route.post('/favorite', addMedia)
+route.get('/favorite/movie/:userId', getFavoriteMovie)
+route.get('/favorite/tv/:userId', getFavoriteTv)
+route.delete('/favorite/:userId/:mediaId', removeMedia)
 
 export default route;
