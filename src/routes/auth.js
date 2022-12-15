@@ -4,11 +4,11 @@ import { changpassword, detailUser, editUser, getFavoriteList, listUser, signin,
 
 const router = Router()
 
-router.post("/auth/signin", signin)
-router.post("/auth/signup", signup)
-router.post("/auth/signinwithnextauth", signinwithnextauth)
-router.post("/auth/changepass", changpassword)
-router.post("/auth/changeprofile", updateUser)
+router.post("/signin", signin)
+router.post("/signup", signup)
+router.post("/signinwithnextauth", signinwithnextauth)
+router.post("/changepass", changpassword)
+router.post("/changeprofile", updateUser)
 
 //----------------AUTH---------------------
 
