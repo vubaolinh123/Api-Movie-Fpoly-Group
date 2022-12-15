@@ -13,8 +13,12 @@ import commentRouter from "./routes/comment";
 
 const app = express();
 
+app.use(cors({
+    origin: 'https://movie.linkcualinh.com',
+    methods: ['POST', 'PUT', 'DELETE','GET']
+}));
+
 // middleware
-app.use(cors());
 app.use(morgan("tiny"))
 app.use(express.json());
 
