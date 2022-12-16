@@ -1,3 +1,5 @@
+##The project was made by 3 members studying at FPT Polytechnic for assignment
+
 ### Link Source Client: https://github.com/vubaolinh123/Api-Movie-Fpoly-Group
 ### Link API DEMO: https://movie-api.linkcualinh.com/
 
