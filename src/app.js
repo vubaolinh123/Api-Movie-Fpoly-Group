@@ -7,14 +7,15 @@ import productRouter from "./routes/product"
 import userRouter from "./routes/auth"
 import favoritelistRouter from "./routes/favoritemovie"
 import commentRouter from "./routes/comment";
+import dotenv from "dotenv"
 
-
-// 
+dotenv.config()
+// https://movie.linkcualinh.com
 
 const app = express();
 
 app.use(cors({
-    origin: 'https://movie.linkcualinh.com',
+    origin: '*',
     methods: ['POST', 'PUT', 'DELETE','GET']
 }));
 
@@ -32,7 +33,7 @@ app.use("/api", commentRouter)
 
 
 
-const mongoAtlasUri = "mongodb+srv://nodejsgroup8:nodejsgroup8@cluster0.btydm.mongodb.net/NodeJS?retryWrites=true&w=majority";
+const mongoAtlasUri = process.env.CONNECT_MONGODB_ATLAT_URL;
 
 try {
     // Connect to the MongoDB cluster
@@ -48,7 +49,8 @@ const dbConnection = mongoose.connection;
 dbConnection.on("error", (err) => console.log(`Kết nối thất bại ${err}`));
 dbConnection.once("open", () => console.log("Kết nối thành công đến DB!"));
 
+const PORT = 8080
 
-app.listen(process.env.PORT || 3001, () => {
+app.listen(PORT, () => {
     console.log("Server của bạn đang chạy");
 })
